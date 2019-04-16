@@ -758,10 +758,10 @@ contains
         ! Each "set term wxt <number>" creates a new window
         type(gpf):: gp
 
-        call gp%add_script('set term wxt 0 title "My first plot" size 640,480')
+        call gp%add_script('set term x11 0 title "My first plot" size 640,480')
         call gp%add_script('set title "Example 17. Multi windows plot using script"')
         call gp%add_script('plot x*x+2*x+1')
-        call gp%add_script('set term wxt 1 title "My second plot"')
+        call gp%add_script('set term x11 1 title "My second plot"')
         call gp%add_script('set ylabel "xsin(x)"')
         call gp%add_script('plot x*sin(x)')
 

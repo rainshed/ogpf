@@ -162,7 +162,7 @@ module ogpf
     ! ogpf Configuration parameters
     ! The terminal and font have been set for Windows operating system
     ! Correct to meet the requirements on other OS like Linux and Mac.
-    character(len=*), parameter ::  gnuplot_term_type = 'wxt'                      ! Output terminal
+    character(len=*), parameter ::  gnuplot_term_type = 'x11'                      ! Output terminal
     character(len=*), parameter ::  gnuplot_term_font = 'verdana,10'               ! font
     character(len=*), parameter ::  gnuplot_term_size = '640,480'   !'960,840'                  ! plot window size
     character(len=*), parameter ::  gnuplot_output_filename='ogpf_temp_script.gp' ! temporary file for output
@@ -2058,9 +2058,9 @@ contains
         ! write the global settings
         write ( this%file_unit, '(a)' ) '# gnuplot global setting'
         write(unit=this%file_unit, fmt='(a)') 'set term ' // gnuplot_term_type // &
-            ' size ' // gnuplot_term_size // ' enhanced font "' // &
-            gnuplot_term_font // '"' // &
-            ' title "' // md_name // ': ' // md_rev //'"'   ! library name and version
+            ' size ' // gnuplot_term_size // ' enhanced font "' // gnuplot_term_font // '"'  
+            
+	  write(unit=this%file_unit,fmt='(a)')	 ' set title "' // md_name // ': ' // md_rev // '"'    ! library name and version
 
         ! write the preset configuration for gnuplot (ogpf customized settings)
         if (this%preset_configuration) then
@@ -2128,6 +2128,7 @@ contains
         !..............................................................................
         class(gpf) :: this
 
+        write(this%file_unit, fmt='(a)') 'pause -1'
         ! check for multiplots
         if (this%hasmultiplot) then
             if (this%multiplot_total_plots < this%multiplot_rows * this%multiplot_cols - 1 ) then
@@ -2147,7 +2148,7 @@ contains
         this%hasfileopen = .false.        ! reset file open flag
         this%hasanimation = .false.
         ! Use shell command to run gnuplot
-        call execute_command_line ('gnuplot -persist ' // this%txtfilename)  !   Now plot the results
+        call execute_command_line ('gnuplot --persist ' // this%txtfilename)  !   Now plot the results
 
     end subroutine finalize_plot
 

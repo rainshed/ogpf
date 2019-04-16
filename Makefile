@@ -14,11 +14,11 @@ SRC_DIR_f90d1 =
 OBJS_DIR = obj/Debug/
 EXE_DIR = bin/Debug/
 
-EXE = ogpf.exe
-FC = gfortran.exe
-LD = gfortran.exe
+EXE = ogpf
+FC = ifort
+LD = ifort
 IDIR = 
-CFLAGS = -Wall -g -std=f2008  -J$(OBJS_DIR) $(IDIR)
+CFLAGS = #-Wall -g -std=f2008  -J$(OBJS_DIR) $(IDIR)
 LFLAGS = 
 LIBS = 
 
